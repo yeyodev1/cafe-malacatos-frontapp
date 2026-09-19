@@ -2,11 +2,12 @@
 import { ref } from 'vue'
 import { site } from '@/config/site'
 import { useStoryMotion } from '@/composables/useStoryMotion'
+import StoryMedia from '@/components/home/StoryMedia.vue'
 
 const root = ref<HTMLElement | null>(null)
 const steps = site.story.steps
 
-// El icono acompaña al capítulo mientras el cliente entrega los videos del proceso.
+// El icono es el respaldo de un capítulo sin video configurado en site.story.steps.
 const icons: Record<string, string> = {
   origen: 'fa-solid fa-mountain-sun',
   tueste: 'fa-solid fa-fire-flame-curved',
@@ -31,7 +32,6 @@ useStoryMotion(root, 'story--pinned')
     <div class="story__stage" data-story-stage>
       <ol class="story__chapters">
         <li v-for="(step, index) in steps" :key="step.key" class="chapter" data-chapter>
-          <!-- Contenedor de medios: acá irá el <video> del proceso cuando el cliente lo entregue. -->
           <div
             class="chapter__media"
             :class="`chapter__media--${step.key}`"
@@ -40,7 +40,8 @@ useStoryMotion(root, 'story--pinned')
             aria-hidden="true"
           >
             <span class="chapter__number">{{ pad(index + 1) }}</span>
-            <i class="chapter__icon" :class="icons[step.key]"></i>
+            <StoryMedia v-if="step.video" :video="step.video" :poster="step.poster" />
+            <i v-else class="chapter__icon" :class="icons[step.key]"></i>
           </div>
 
           <div class="chapter__body" data-chapter-body>
