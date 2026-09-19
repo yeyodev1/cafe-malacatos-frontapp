@@ -4,8 +4,18 @@ import { site } from '@/config/site'
 import { useStoryMotion } from '@/composables/useStoryMotion'
 import StoryMedia from '@/components/home/StoryMedia.vue'
 
+interface StoryStep {
+  key: string
+  title: string
+  text: string
+  video?: string
+  poster?: string
+}
+
 const root = ref<HTMLElement | null>(null)
-const steps = site.story.steps
+// Tipado explícito: site.ts es `as const`, y si todos los capítulos traen video el
+// compilador da por imposible la rama del icono y reduce `step` a never.
+const steps: readonly StoryStep[] = site.story.steps
 
 // El icono es el respaldo de un capítulo sin video configurado en site.story.steps.
 const icons: Record<string, string> = {
