@@ -5,6 +5,7 @@ import { useUserStore } from '@/stores/user'
 import { useToastStore } from '@/stores/toast'
 import { useSeo } from '@/composables/useSeo'
 import BaseCta from '@/components/ui/BaseCta.vue'
+import MyOrdersList from '@/components/checkout/MyOrdersList.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -45,6 +46,8 @@ useSeo(() => ({ title: text.eyebrow, path: '/cuenta', noindex: true }))
         <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> {{ text.logout }}
       </button>
     </div>
+
+    <MyOrdersList class="account__orders" />
   </section>
 </template>
 
@@ -91,6 +94,10 @@ useSeo(() => ({ title: text.eyebrow, path: '/cuenta', noindex: true }))
   &__actions {
     @include flex(row, center, flex-start, 0.75rem);
     flex-wrap: wrap;
+  }
+
+  &__orders {
+    margin-top: $space-md;
   }
 }
 </style>
