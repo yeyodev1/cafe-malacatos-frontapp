@@ -134,7 +134,13 @@ const router = createRouter({
   // baja a la sección; si no, arriba.
   scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) return savedPosition
-    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+    if (to.hash) {
+      // La transición de página es out-in: al resolver, la vista destino aún no
+      // está montada y el ancla no existe. Se espera a que termine.
+      return new Promise((resolve) => {
+        setTimeout(() => resolve({ el: to.hash, behavior: 'smooth' }), 320)
+      })
+    }
     return { left: 0, top: 0 }
   },
 })
