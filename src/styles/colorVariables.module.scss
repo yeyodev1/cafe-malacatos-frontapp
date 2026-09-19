@@ -7,18 +7,27 @@ $accent: #753c2b;
 $accent-deep: color.adjust($accent, $lightness: -12%);
 $accent-soft: color.mix($accent, #ffffff, 14%);
 
+// Dorado de la funda: segundo color de marca, para realces y llamados
+$gold: #e0a92a;
+$gold-deep: #b9851a;
+$gold-soft: #f7e7b8;
+
+// Fondo oscuro de las secciones de historia (tueste)
+$roast: #1c120c;
+$roast-soft: #2c1d14;
+
 // Superficies
-$paper: #fdfcfa; // fondo base
+$paper: #fbf7f0; // fondo base
 $surface: #ffffff; // superficies elevadas
-$sand: #f1ece6; // bloques suaves
-$line: #e7e1d9; // bordes
+$sand: #f3eadc; // bloques suaves
+$line: #e6dccb; // bordes
 
 // Texto
-$ink: #191423; // texto principal
-$ink-soft: #4a4552; // texto secundario
-$ink-muted: #8a8590; // terciario / labels
+$ink: #21140d; // texto principal
+$ink-soft: #5a4a3f; // texto secundario
+$ink-muted: #94857a; // terciario / labels
 
-$overlay: rgba(#100c14, 0.55);
+$overlay: rgba(#140b06, 0.6);
 
 // Estados
 $success: #3bb77e;
