@@ -10,6 +10,104 @@ const routes: Array<RouteRecordRaw> = [
     meta: { title: site.name },
   },
   {
+    path: '/tienda',
+    name: 'Shop',
+    component: () => import('@/views/ShopView.vue'),
+    meta: { title: 'Tienda' },
+  },
+  {
+    path: '/producto/:slug',
+    name: 'Product',
+    component: () => import('@/views/ProductView.vue'),
+    meta: { title: 'Producto' },
+  },
+  {
+    path: '/carrito',
+    name: 'Cart',
+    component: () => import('@/views/CartView.vue'),
+    meta: { title: 'Tu carrito' },
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: () => import('@/views/CheckoutView.vue'),
+    meta: { title: 'Finalizar compra' },
+  },
+  {
+    // URL de respuesta registrada en Payphone Developer: no cambiar la ruta.
+    path: '/pago/respuesta',
+    name: 'PaymentResponse',
+    component: () => import('@/views/PaymentResponseView.vue'),
+    meta: { title: 'Resultado del pago' },
+  },
+  {
+    path: '/pedido/:number',
+    name: 'OrderTracking',
+    component: () => import('@/views/OrderTrackingView.vue'),
+    meta: { title: 'Tu pedido' },
+  },
+  {
+    path: '/registro',
+    name: 'Register',
+    component: () => import('@/views/RegisterView.vue'),
+    meta: { title: 'Crear cuenta', guestOnly: true },
+  },
+  {
+    path: '/admin',
+    component: () => import('@/views/admin/AdminLayout.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
+    children: [
+      {
+        path: '',
+        name: 'AdminDashboard',
+        component: () => import('@/views/admin/AdminDashboardView.vue'),
+        meta: { title: 'Panel' },
+      },
+      {
+        path: 'productos',
+        name: 'AdminProducts',
+        component: () => import('@/views/admin/AdminProductsView.vue'),
+        meta: { title: 'Productos' },
+      },
+      {
+        path: 'productos/:id',
+        name: 'AdminProductEdit',
+        component: () => import('@/views/admin/AdminProductEditView.vue'),
+        meta: { title: 'Editar producto' },
+      },
+      {
+        path: 'ordenes',
+        name: 'AdminOrders',
+        component: () => import('@/views/admin/AdminOrdersView.vue'),
+        meta: { title: 'Órdenes' },
+      },
+      {
+        path: 'ordenes/:id',
+        name: 'AdminOrderDetail',
+        component: () => import('@/views/admin/AdminOrderDetailView.vue'),
+        meta: { title: 'Orden' },
+      },
+      {
+        path: 'clientes',
+        name: 'AdminCustomers',
+        component: () => import('@/views/admin/AdminCustomersView.vue'),
+        meta: { title: 'Clientes' },
+      },
+      {
+        path: 'envios',
+        name: 'AdminShipping',
+        component: () => import('@/views/admin/AdminShippingView.vue'),
+        meta: { title: 'Envíos' },
+      },
+      {
+        path: 'ajustes',
+        name: 'AdminSettings',
+        component: () => import('@/views/admin/AdminSettingsView.vue'),
+        meta: { title: 'Ajustes' },
+      },
+    ],
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/LoginView.vue'),
@@ -44,17 +142,26 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const userStore = useUserStore()
 
-  if (to.meta.requiresAuth || to.meta.guestOnly) {
+  const needsAuth = to.matched.some((r) => r.meta.requiresAuth)
+  const needsAdmin = to.matched.some((r) => r.meta.requiresAdmin)
+
+  if (needsAuth || to.meta.guestOnly) {
     // La sesión se verifica contra el API una sola vez por carga.
     await userStore.restore()
   }
 
-  if (to.meta.requiresAuth && !userStore.isAuthenticated) {
+  if (needsAuth && !userStore.isAuthenticated) {
     return { name: 'Login', query: { next: to.fullPath }, replace: true }
   }
 
+  if (needsAdmin && !userStore.isAdmin) {
+    return { name: 'Home', replace: true }
+  }
+
   if (to.meta.guestOnly && userStore.isAuthenticated) {
-    return { name: 'Account', replace: true }
+    return userStore.isAdmin
+      ? { name: 'AdminDashboard', replace: true }
+      : { name: 'Account', replace: true }
   }
 })
 
