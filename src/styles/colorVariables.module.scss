@@ -29,6 +29,10 @@ $ink-muted: #94857a; // terciario / labels
 
 $overlay: rgba(#140b06, 0.6);
 
+// WhatsApp: verde con contraste suficiente para icono y texto blancos
+$whatsapp: #128c4a;
+$whatsapp-deep: #0e6f3b;
+
 // Estados
 $success: #3bb77e;
 $warning: #d9a441;
@@ -38,6 +42,9 @@ $success-bg: rgba($success, 0.12);
 $warning-bg: rgba($warning, 0.12);
 $info-bg: rgba($info, 0.12);
 $danger-bg: rgba($danger, 0.12);
+// Variante apta para texto pequeño sobre fondo claro (AA)
+$danger-text: #8f322d;
+$success-text: #1f7a50;
 
 // Compatibilidad con el scaffold base
 $primary: $accent;
