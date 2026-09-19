@@ -47,8 +47,8 @@ export const site = {
     steps: [
       {
         key: 'origen',
-        video: '',
-        poster: '',
+        video: '/videos/origen.mp4',
+        poster: '/videos/origen.jpg',
         title: 'Origen',
         text: 'Cada grano ha sido cuidadosamente seleccionado en el corazón de las montañas de Malacatos.',
       },
@@ -61,8 +61,8 @@ export const site = {
       },
       {
         key: 'taza',
-        video: '',
-        poster: '',
+        video: '/videos/taza.mp4',
+        poster: '/videos/taza.jpg',
         title: 'Tu taza',
         text: 'Un sabor profundo y auténtico que representa la rica herencia cafetera de Loja.',
       },
