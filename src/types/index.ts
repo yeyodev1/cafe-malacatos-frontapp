@@ -86,7 +86,8 @@ export interface ShippingZone {
 
 export interface ShippingQuote {
   available: boolean
-  shippingCents: number
+  // null cuando la provincia no tiene tarifa: el backend no inventa un monto
+  shippingCents: number | null
   totalWeightGrams: number
 }
 
