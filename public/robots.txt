@@ -1,4 +1,31 @@
+# Café Malacatos — https://cafemalacatos.com
+# Todo el sitio público es rastreable. Quedan fuera el panel y las páginas
+# privadas o transaccionales (carrito, checkout, resultado de pago, pedidos).
+
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /checkout
+Disallow: /carrito
+Disallow: /pago
+Disallow: /pedido
+
+# Rastreadores de asistentes de IA: permitidos de forma explícita, con las
+# mismas exclusiones que el resto.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+Disallow: /checkout
+Disallow: /carrito
+Disallow: /pago
+Disallow: /pedido
 
 Sitemap: https://cafemalacatos.com/sitemap.xml
