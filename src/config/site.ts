@@ -41,20 +41,28 @@ export const site = {
     title: 'Mucho más que una bebida',
     intro:
       'Aquí celebramos el arte de cultivar y tostar café, llevando a cada taza una experiencia sensorial única, que evoca la calidez y el sabor de nuestra tierra. Es una conexión con lo mejor de Ecuador.',
-    // Capítulos del recorrido con scroll. Los videos del proceso están pendientes del cliente.
+    // Capítulos del recorrido con scroll. `video` y `poster` son rutas dentro de public/.
+    // Hoy son clips de ambientación generados; se reemplazan por los videos reales del
+    // proceso cuando el cliente los entregue. Sin `video`, el capítulo muestra su icono.
     steps: [
       {
         key: 'origen',
+        video: '',
+        poster: '',
         title: 'Origen',
         text: 'Cada grano ha sido cuidadosamente seleccionado en el corazón de las montañas de Malacatos.',
       },
       {
         key: 'tueste',
+        video: '/videos/tueste.mp4',
+        poster: '/videos/tueste.jpg',
         title: 'Tueste',
         text: 'Tostado para ofrecerte una experiencia rica, intensa y llena de autenticidad.',
       },
       {
         key: 'taza',
+        video: '',
+        poster: '',
         title: 'Tu taza',
         text: 'Un sabor profundo y auténtico que representa la rica herencia cafetera de Loja.',
       },
